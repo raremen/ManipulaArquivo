@@ -11,42 +11,20 @@ public class Programa {
 
 
 	public static void main(String[] args) {
-// abertura e fechamento manual dos arquivos
+
 		String sCaminho = "C:\\Users\\rafael.souza\\Desktop\\"
 				+ "eclipse-jee-photon-R-win32-x86_64\\ProjetosDoCurso\\Manipulando_Arquivos\\Entrada.txt";
 
-		FileReader lerArquivo = null;
-		BufferedReader lerEscrita = null; // acelera leitura de arquivos
-
-		try {
-			lerEscrita = new BufferedReader(new FileReader(sCaminho));
-//			lerArquivo = new FileReader(sCaminho);
-//			lerEscrita = new BufferedReader(lerArquivo);
-
+		try ( BufferedReader lerEscrita = new BufferedReader(new FileReader(sCaminho))) {
 			String sLinha = lerEscrita.readLine();
-
+			
 			while (sLinha != null) {
 				System.out.println(sLinha);
 				sLinha = lerEscrita.readLine();
 			}
+			
 		} catch (IOException e) {
 			System.out.println("Arquivo não encontrado: \n" + e.getMessage() + " Erro que aconteceu");
-		}
-
-		finally {
-			
-			try {
-				
-				if (lerEscrita != null) {
-					lerEscrita.close();
-				}
-				if (lerArquivo != null) {
-					lerArquivo.close();
-				}
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 		
 	}
