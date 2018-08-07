@@ -1,30 +1,28 @@
 package Aplicacao;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.util.Scanner;
 
 public class Programa {
 
 
 	public static void main(String[] args) {
 
+		// Cria arquivo e escreve dentro
+		
+		String [] sLinhas = new String [] { "Bom dia!", "Oh! Você por aqui!"};
 		String sCaminho = "C:\\Users\\rafael.souza\\Desktop\\"
-				+ "eclipse-jee-photon-R-win32-x86_64\\ProjetosDoCurso\\Manipulando_Arquivos\\Entrada.txt";
-
-		try ( BufferedReader lerEscrita = new BufferedReader(new FileReader(sCaminho))) {
-			String sLinha = lerEscrita.readLine();
-			
-			while (sLinha != null) {
-				System.out.println(sLinha);
-				sLinha = lerEscrita.readLine();
+				+ "eclipse-jee-photon-R-win32-x86_64\\ProjetosDoCurso\\Manipulando_Arquivos\\T.txt";
+		
+		try (BufferedWriter criaArquivo  = new BufferedWriter(new FileWriter(sCaminho, true))){ // true para escrever sem deletar
+			for (String sLinha : sLinhas) {
+				criaArquivo.write(sLinha);
+				criaArquivo.newLine(); // salta linha dentro do arquivo
 			}
 			
-		} catch (IOException e) {
-			System.out.println("Arquivo não encontrado: \n" + e.getMessage() + " Erro que aconteceu");
+		} catch (IOException e){
+			e.printStackTrace();
 		}
 		
 	}
